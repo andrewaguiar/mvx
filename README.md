@@ -14,7 +14,7 @@ but even though it works perfectly I missed some features like:
 
 So because this I decided to create my own tool for this.
 
-![Example](example.png)
+![Example](example.jpg)
 
 ## Installation
 
