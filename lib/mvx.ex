@@ -35,7 +35,7 @@ defmodule Mvx do
     IO.puts("  Conbine #{Colors.yellow("IDs")} and Ranges freely. example: #{Colors.yellow("1,2,3,10..12,20..25")}")
     IO.puts("  Type nothing and press Enter to abort\n")
 
-    case IO.gets("Which lines do you want to replace? ") do
+    case IO.gets("Which files do you want to replace? ") do
       "\n" ->
         IO.puts("\nAborting!")
 

@@ -5,12 +5,9 @@ a `sed` less powerfull but simpler.
 
 ## Motivation
 
-Sometimes I wanted to perform some string replacement on several files, I used `sed` for this
-but even though it works perfectly I missed some features like:
-
   - Filtering only git files `git ls-files`.
   - Visual preview of changes.
-  - Be able to cherry pick which files / lines would be changed.
+  - Be able to cherry pick which files would be changed.
 
 So because this I decided to create my own tool for this.
 
@@ -60,7 +57,7 @@ DESCRIPTION
        --filename | -f
               Filters by absolute path name in any part (defaults '').
 
-              Example: "mvx AppController ApplicationController -f controllers" will consider only files with controllers
+              Example: "mvx controllers app_controllers -f controllers" will consider only files with controllers
                        in absolute path like ("app/controllers/app_controllers.rb", "config/controllers.rb").
 
        --regex | -r

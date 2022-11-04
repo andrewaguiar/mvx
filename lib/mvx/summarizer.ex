@@ -1,8 +1,8 @@
 defmodule Mvx.Summarizer do
   alias Mvx.Colors
 
-  def print(matched_lines) do
-    total_files = matched_lines
+  def print(matched_files) do
+    total_files = matched_files
       |> Enum.map(fn {_, file} -> file end)
       |> Enum.uniq
       |> length

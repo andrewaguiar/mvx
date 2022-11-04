@@ -3,39 +3,29 @@ defmodule Mvx.Term do
 
   defstruct [:value, :regex]
 
-  def match?(%Mvx.Term{value: term_string, regex: false}, line) do
-    line =~ term_string
+  def match?(%Mvx.Term{value: term_string, regex: false}, file) do
+    file =~ term_string
   end
 
-  def match?(%Mvx.Term{value: term_string, regex: true}, line) do
-    term_string |> Regex.compile! |> Regex.match?(line)
+  def match?(%Mvx.Term{value: term_string, regex: true}, file) do
+    term_string |> Regex.compile! |> Regex.match?(file)
   end
 
-  def highlight(%Mvx.Term{value: term_string, regex: false}, line) do
-    String.replace(line, term_string, Colors.red(term_string))
+  def highlight(%Mvx.Term{value: term_string, regex: false}, file) do
+    String.replace(file, term_string, Colors.red(term_string))
   end
 
-  def highlight(%Mvx.Term{value: term_string, regex: true}, line) do
-    term_string |> Regex.compile! |> Regex.replace(line, fn x -> Colors.red(x) end)
+  def highlight(%Mvx.Term{value: term_string, regex: true}, file) do
+    term_string |> Regex.compile! |> Regex.replace(file, fn x -> Colors.red(x) end)
   end
 
-  def match(%Mvx.Term{value: term_string, regex: false}, line) do
-    :binary.match(line, term_string)
+  def replace(%Mvx.Term{value: term_string, regex: false}, file, replacement) do
+    String.replace(file, term_string, replacement, global: true)
   end
 
-  def match(%Mvx.Term{value: term_string, regex: true}, line) do
-    result_term = term_string |> Regex.compile! |> Regex.run(line)
+  def replace(%Mvx.Term{value: term_string, regex: true}, file, replacement) do
+    String.replace(file, term_string, replacement, global: true)
 
-    :binary.match(line, result_term)
-  end
-
-  def replace(%Mvx.Term{value: term_string, regex: false}, line, replacement) do
-    String.replace(line, term_string, replacement, global: true)
-  end
-
-  def replace(%Mvx.Term{value: term_string, regex: true}, line, replacement) do
-    String.replace(line, term_string, replacement, global: true)
-
-    term_string |> Regex.compile! |> Regex.replace(line, replacement)
+    term_string |> Regex.compile! |> Regex.replace(file, replacement)
   end
 end
